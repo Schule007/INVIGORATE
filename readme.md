@@ -12,8 +12,8 @@ git submodule init
 git submodule update --recursive --init
 
 # clone another copy for use inside docker
-git clone https://github.com/AdaCompNUS/INVIGORATE.git INVIGORATE_docker 
-cd INVIGORATE_docker
+git clone https://github.com/AdaCompNUS/INVIGORATE.git <path to invigorate_docker folder>
+cd <path to invigorate_docker folder>
 git submodule init
 git submodule update --recursive --init
 ```
@@ -41,7 +41,7 @@ Our docker uses cuda 9.0 and it has a conda environment called **torch_old** tha
 ```
 cd .. # move to the parent folder of INVIGORATE
 docker pull adacompnus/vmrd
-docker run --gpus all -v "$(pwd)"/INVIGORATE_docker:/home/INVIGORATE_docker --network host -it adacompnus/vmrd /bin/bash # mount INVIGORATE_docker folder into docker and give GPU and network access
+docker run --gpus all -v <path to invigorate_docker folder>: /home/invigorate_docker --network host -it adacompnus/vmrd /bin/bash # mount INVIGORATE_docker folder into docker and give GPU and network access
 ```
 4. Now you are inside the docker, use the provided **torch_old** environment.
 ```
@@ -154,6 +154,7 @@ bash launch_detectron2.sh
 ```
 3. Start mattnet service inside docker
 ```
+cd /home/invigorate_docker
 conda activate torch_old
 source devel/setup.bash
 cd src
@@ -161,6 +162,7 @@ bash launch_mattnet.sh
 ```
 4. Start vmrn service inside docker
 ```
+cd /home/invigorate_docker
 conda activate torch_old
 source devel/setup.bash
 cd src
